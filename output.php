@@ -1,0 +1,31 @@
+<?php
+$client = curl_init('http://api.ruvictor.com/apiHandler.php?action=outputData');
+curl_setopt($client,CURLOPT_RETURNTRANSFER,1);
+$response = curl_exec($client);
+$result = json_decode($response);
+
+
+$output ='';
+
+
+if(count($result)> 0){
+    foreach($result as $result){
+     $output .= '
+        <tr>
+                <td>'.$row->id.'</td>
+                <td>'.$row->author.'</td>
+                <td>'.$row->quote.'</td>
+                <td>'.$row->category.'</td>
+        </tr>
+     ';   
+    }
+
+}else {
+    $output .= '<tr><td colspan ="3" align="center">Not Found!</td></tr>';
+
+
+}
+
+echo $output;
+
+?>
